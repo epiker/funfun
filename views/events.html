@@ -1,0 +1,31 @@
+<div id="events"></div>
+
+<h1></h1><br>
+<h1></h1>
+<script>
+    function action(Id) {
+        $.actions({
+            actions: [{
+                text: "编辑",
+                onClick: function() {
+                    //do something
+                }
+            },{
+                text: "删除",
+                onClick: function() {
+                   $.post('/delete_event',{Id:Id},function (data) {
+                       if(typeof (data.error)=='undefined')
+                       {
+                           $.toptip('删除成功', 'success');
+                           ask_for_events();
+                       }
+                       else
+                       {
+                           $.toptip('删除失败:'+data.error, 'error');
+                       }
+                   });
+                }
+            }]
+        });
+    }
+</script>

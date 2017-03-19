@@ -1,0 +1,239 @@
+
+
+<script src="/dist/js/jquery.min.js"></script>
+<script src="/dist/bootstrap/js/bootstrap.min.js"></script>
+<div class="weui-cells weui-cells_form">
+    <div class="weui-cells__title">标题</div>
+    <div class="weui-cells">
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" id="title" placeholder="请输入事件标题">
+            </div>
+        </div>
+    </div>
+    <div class="weui-cells__title">事件描述</div>
+    <div class="weui-cells weui-cells_form">
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <textarea class="weui-textarea" placeholder="请输入事件描述" id="descrption" rows="3"></textarea>
+                <div class="weui-textarea-counter"><span>0</span>/200</div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label for="starttime" class="weui-label">开始时间</label></div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" id="starttime" type="text" value="">
+        </div>
+    </div>
+
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label for="endtime" class="weui-label">结束时间</label></div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" id="endtime" type="text" value="">
+        </div>
+    </div>
+
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">资源</label></div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" readonly="readonly" id="selectedResourcesTitle" data-toggle="modal" data-target="#ResourceModal" onclick="loadResource()" placeholder="单击添加资源">
+            <input type="hidden" id="selectedResourcesId">
+        </div>
+    </div>
+
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">成员</label></div>
+        <div class="weui-cell__bd">
+            <input class="weui-input"  readonly="readonly" id="selectedUserName" data-toggle="modal" data-target="#UserModal" onclick="loadUser()" placeholder="单击添加用户">
+            <input type="hidden" id="selectedUserId">
+        </div>
+    </div>
+
+
+</div>
+<a href="javascript:;" onclick="submit()" class="weui-btn weui-btn_primary">提交</a>
+
+<script>
+    function submit() {
+        var json=
+        {
+          Title:$('#title').val(),
+            Description:$('#descrption').val(),
+            starttm:$('#starttime').val(),
+            endtm:$('#endtime').val(),
+            Resources:$('#selectedResourcesTitle').val(),
+            Users:$('#selectedUserName').val(),
+            ResourcesId:$('#selectedResourcesId').val(),
+            UsersId:$('#selectedUserId').val()
+        };
+        $.post("/insertEvent",json,function (data) {
+           if(typeof (data.error)=='undefined')
+           {
+               $.toptip('添加成功', 'success');
+               ask_for_events();
+               window.location.href='#tab2';
+           }
+           else
+           {
+               $.toptip('添加失败:'+data.error, 'error');
+           }
+        });
+    }
+</script>
+<script>
+    function loadResource() {
+        $.post('/ask_for_resources',function (data) {
+            if(typeof (data) !="object"||data.length<1)
+            {
+                return;
+            }
+            var len=data.length;
+            var str='';
+            for(var i=0;i<len;i++)
+            {
+                str+=[' <label class="weui-cell weui-check__label" for="r'+data[i].Id+'">',
+                    '            <div class="weui-cell__hd">',
+                    '                      <input type="checkbox" name="Resourcecheckbox"  class="weui-check" id="r'+data[i].Id+'" value="'+data[i].Title+'">',
+                    '                       <i class="weui-icon-checked"></i>',
+                    '             </div>',
+                    '             <div class="weui-cell__bd">',
+                    '                     <p>'+data[i].Title+'</p>',
+                    '              </div>',
+                    ' </label>'].join("");
+            }
+            document.getElementById('ResourceList').innerHTML=str;
+           // $.hideLoading();
+        });
+    }
+    function loadUser() {
+        $.post('/ask_for_users',function (data) {
+            if(typeof (data) !="object"||data.length<1)
+            {
+                return;
+            }
+            var len=data.length;
+            var str='';
+            for(var i=0;i<len;i++)
+            {
+                str+=[' <label class="weui-cell weui-check__label" for="u'+data[i].Id+'">',
+                    '            <div class="weui-cell__hd">',
+                    '                      <input type="checkbox" name="Usercheckbox"  class="weui-check" id="u'+data[i].Id+'" value="'+data[i].Name+'">',
+                    '                       <i class="weui-icon-checked"></i>',
+                    '             </div>',
+                    '             <div class="weui-cell__bd">',
+                    '                     <p>'+data[i].Name+'</p>',
+                    '              </div>',
+                    ' </label>'].join("");
+            }
+            document.getElementById('UserList').innerHTML=str;
+            // $.hideLoading();
+        });
+    }
+    function ResourceSelected() {
+        var checks = document.getElementsByName("Resourcecheckbox");
+        var ids='',titles='';
+        for(var i=0;i<checks.length;i++){
+            if(checks[i].checked)
+            {
+                ids+=checks[i].id.slice(1)+",";
+                titles+=checks[i].value+",";
+            }
+        }
+        $('#selectedResourcesId').val(ids);
+        $('#selectedResourcesTitle').val(titles);
+    }
+
+    function UserSelected() {
+        var checks = document.getElementsByName("Usercheckbox");
+        var ids='',names='';
+        for(var i=0;i<checks.length;i++){
+            if(checks[i].checked)
+            {
+                ids+=checks[i].id.slice(1)+",";
+                names+=checks[i].value+",";
+            }
+        }
+        $('#selectedUserId').val(ids);
+        $('#selectedUserName').val(names);
+    }
+</script>
+
+
+
+
+
+
+
+<script src="/dist/js/jquery-weui.js"></script>
+<script>
+    $("#starttime").datetimePicker({
+        title: '出发时间',
+        min: "1990-12-12",
+        max: "2022-12-12 12:12",
+        onChange: function (picker, values, displayValues) {
+            console.log(values);
+        }
+    });
+    $("#endtime").datetimePicker({
+        title: '出发时间',
+        min: "1990-12-12",
+        max: "2022-12-12 12:12",
+        onChange: function (picker, values, displayValues) {
+            console.log(values);
+        }
+    });
+
+</script>
+
+<!-- 资源模态框（ResourceModalModal） -->
+<div class="modal fade" id="ResourceModal" tabindex="-1" role="dialog" aria-labelledby="ResourceModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="weui-search-bar" id="searchBar">
+                    <form class="weui-search-bar__form">
+                        <div class="weui-search-bar__box">
+                            <i class="weui-icon-search"></i>
+                            <input type="search" class="weui-search-bar__input" id="searchInput" oninput="change()" placeholder="搜索" required="">
+                            <a href="javascript:" class="weui-icon-clear" id="searchClear"></a>
+                        </div>
+                        <label class="weui-search-bar__label" id="searchText">
+                            <i class="weui-icon-search"></i>
+                            <span>搜索</span>
+                        </label>
+                    </form>
+                    <a href="javascript:" onclick="searchCancel()" class="weui-search-bar__cancel-btn" id="searchCancel">取消</a>
+                </div>
+            </div>
+            <div class=" weui-cells weui-cells_checkbox" id="ResourceList">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" onclick="ResourceSelected()" data-dismiss="modal">确定
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<!-- 用户模态框（UserModal） -->
+<div class="modal fade" id="UserModal" tabindex="-1" role="dialog" aria-labelledby="UserModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class=" weui-cells weui-cells_checkbox" id="UserList">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" onclick="UserSelected()" data-dismiss="modal">确定
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+

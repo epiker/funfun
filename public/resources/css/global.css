@@ -1,0 +1,192 @@
+@charset "utf-8";
+
+/** 整体样式 **/
+body{
+	font-family:'微软雅黑';
+	background-repeat:no-repeat;
+	background-attachment:fixed;
+	background-position-x:0px;
+	background-position-y:0px;
+}
+
+/** FontAwesome图标默认样式 **/
+i.fa{width:14px;text-align:center;}
+
+/** 连接默认样式 **/
+a, a:hover, a:focus, a:visited{text-decoration: none;}
+a>i{margin-right:10px;}
+
+/** label样式 **/
+.label{border-radius:0;font-weight:normal;}
+
+/** 顶部工具栏样式 - 基础样式 **/
+.navbar{margin-bottom:0;border:0;}
+
+/** 顶部工具栏样式 - 小屏状态下下拉工具栏样式 **/
+@media (max-width: 767px) {
+	.navbar-collapse {margin-left:50px;}
+}
+
+/** 顶部工具栏样式 - 小屏幕样式下打开的下拉菜单背景色样式 **/
+@media (max-width: 767px) {
+	.navbar-nav .open .dropdown-menu {
+		background:white;
+	}
+}
+
+/** 顶部工具栏样式 - 标题样式 **/
+.navbar a.navbar-brand{color:white;font-size:20px;padding:0 10px;line-height:50px;}
+
+/** 顶部工具栏样式 - 小屏幕下的下拉按钮 **/
+.navbar .navbar-toggle{color:white;font-size:14px;padding:0;margin:0;margin-right:10px;height:50px;line-height:48px;}
+
+/** 顶部工具栏样式 - 切换菜单样式按钮样式 **/
+a.navbar-menu-toggle{
+	float:right;
+	background:black;
+	width:30px;
+	height:30px;
+	line-height:30px;
+	margin-top:10px;
+	background: none repeat scroll 0 0 rgba(0, 0, 0, 0.3);
+    text-align:center;
+    color:rgba(255, 255, 255, 0.8);
+    margin-right:10px;
+    font-size:14px;
+}
+a.navbar-menu-toggle>i{margin:0;}
+a.navbar-menu-toggle:hover{background:rgba(0,0,0,0.6);}
+
+/** 顶部工具栏样式 - 工具按钮样式 **/
+.nav>li>a{background:transparent;color:white;padding-left:10px;padding-right:10px;}
+.nav>li>a>i.fa-right{margin-left:8px;margin-right:0;}
+.nav>li>a:hover, .nav>li>a:focus, .nav>li>a:visited{background:transparent;}
+.nav .open>a, .nav .open>a:hover, .nav .open>a:focus {background:transparent;}
+
+/** 顶部工具栏样式 - 工具按钮图标样式 **/
+ul.navbar-icon{padding:0 0;}
+ul.navbar-icon>li{padding:0;}
+ul.navbar-icon>li>a{font-size:16px;padding-left:10px;padding-right:10px;}
+ul.navbar-icon>li>a>i{margin-right:0;}
+ul.navbar-icon>li>a>.navbar-icon-text{font-size:12px;margin-left:10px;}
+ul.navbar-icon>li>a>i.fa-right{font-size:12px;margin-left:8px;margin-right:0;}
+
+/** 顶部工具栏样式 - 公告下拉样式 **/
+ul.dropdown-menu-announcement{max-height:320px;overflow:auto;}
+
+/** 顶部工具栏样式 - 选择皮肤样式 **/
+ul.dropdown-menu-skin{padding:0;padding-top:5px;}
+ul.dropdown-menu-skin>li{display:inline-block;}
+ul.dropdown-menu-skin>li>a{display:inline-block;width:20px;height:20px;padding:0;margin-left:5px;margin-bottom:5px;}
+ul.dropdown-menu-skin>li>a>img{width:20px;height:20px;}
+ul.dropdown-menu-skin>li>a:hover{-moz-animation:heart_beat .5s ease-in-out;-webkit-animation:heart_beat .2s ease-in-out;}  
+@-moz-keyframes heart_beat{
+	0%{-moz-transform:scale(1)}
+	25%{-moz-transform:scale(1.1)}
+	50%{-moz-transform:scale(0.9)}
+	75%{-moz-transform:scale(1.1)}
+	100%{-moz-transform:scale(1)}
+}
+@-webkit-keyframes heart_beat{
+	0%{-webkit-transform:scale(1)}
+	25%{-webkit-transform:scale(1.1)}
+	50%{-webkit-transform:scale(0.9)}
+	75%{-webkit-transform:scale(1.1)}
+	100%{-webkit-transform:scale(1)}
+}
+@media (max-width: 767px) {
+	.navbar-nav .open ul.dropdown-menu-skin>li>a{padding:0;}
+}
+
+/** 顶部工具栏样式 - 信息样式 **/
+.navbar-header-info{background: none repeat scroll 0 0 rgba(0, 0, 0, 0.2);border: 1px solid rgba(0, 0, 0, 0.2);display:inline;float:left;height:28px;margin-left:10px;margin-top:12px;}
+.navbar-header-info>ul{margin:0;padding:0;list-style-type:none;display:inline;}
+.navbar-header-info>ul>li{float:left;}
+.navbar-header-info>ul>li>a{padding:0 10px;line-height:26px;color:white;border-right: 1px solid rgba(0, 0, 0, 0.4);box-shadow: 1px 0 0 rgba(255, 255, 255, 0.1);}
+.navbar-header-info>ul>li:last-child>a{border-right: 0;box-shadow: none;}
+.navbar-header-info>ul>li>a:hover{text-decoration: none;}
+
+/** 顶部工具栏样式 - 信息样式 - 任务样式 **/
+.dropdown-task>li{padding-right:40px;position:relative;}
+.dropdown-task>li>a.hide-on-this-session{position:absolute;top:0;right:10px;padding:0;margin:0;width:20px;height:20px;text-align:center;line-height:20px;margin-top:1px;}
+.dropdown-task>li>a.hide-on-this-session>i{margin:0;}
+
+/** 顶部工具栏样式 - 信息样式 - 公告样式 **/
+.header-notice-container{overflow:hidden;height:26px;padding:0 10px;position:relative;width:260px;}
+.header-notice-container>ul{list-style-type:none;float:left;padding:0;position:absolute;top:0;left:10px;}
+.header-notice-container>ul>li{height:26px;}
+.header-notice-container>ul>li>a{float:left;overflow:hidden;line-height:26px;color:white;width:240px;text-overflow : ellipsis;white-space : nowrap;word-break:keep-all;}
+.header-notice-container>ul>li>a i{margin-right:10px;}
+
+/** 标准左侧菜单栏样式 **/
+.left-sider{width:240px;position:absolute;top:70px;left:0;padding:10px;padding-top:0;margin-bottom:20px;}
+.left-sider ul, .left-sider li, .left-sider a{list-style-type:none;float:left;width:100%;}
+.left-sider a>i{width:14px;text-align:center;}
+.left-sider a>i.fa-right{width:14px;text-align:center;margin-right:10px;float:right;margin-top:12px;}
+.left-sider>ul{padding-left:0;}
+.left-sider>ul>li{background:red;margin-bottom:10px;background: none repeat scroll 0 0 rgba(0, 0, 0, 0.2);box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);}
+.left-sider>ul>li>a{float:left;margin:5px 5px;width:auto;background: none repeat scroll 0 0 rgba(0, 0, 0, 0.2);padding:3px 10px;color: rgba(255, 255, 255, 0.9);}
+.left-sider>ul>li>a:hover{text-decoration: none;}
+.left-sider>ul>li>ul{padding-left:0;}
+.left-sider>ul>li>ul>li>a{float:left;height:36px;width:100%;background:transparent;line-height:36px;color: rgba(255, 255, 255, 0.9);padding-left:26px;}
+.left-sider>ul>li>ul>li>a:hover{border-left:2px solid white;padding-left:24px;text-decoration: none;background-color: rgba(0, 0, 0, 0.2);}
+.left-sider>ul>li>ul>li>a:hover:before {border: 5px solid transparent;border-left: 5px solid #fff;width: 0;height: 0;position: absolute;margin-top:12px;margin-left:-24px;content: ' '}
+.left-sider>ul>li>ul>li>ul{padding-left:0;display:none;}
+.left-sider>ul>li>ul>li>ul>li>a{float:left;height:36px;width:100%;background-color: rgba(0, 0, 0, 0.3);line-height:36px;color: rgba(255, 255, 255, 0.9);padding-left:26px;}
+.left-sider>ul>li>ul>li>ul>li>a:hover{border-left:2px solid white;padding-left:24px;text-decoration: none;background-color: rgba(0, 0, 0, 0.2);}
+.left-sider>ul>li>ul>li>ul>li>a:hover:before {border: 5px solid transparent;border-left: 5px solid #fff;width: 0;height: 0;position: absolute;margin-top:12px;margin-left:-24px;content: ' '}
+@media (max-width: 768px) {
+	.left-sider{display:none !important;visibility: hidden !important;}
+}
+
+/** 小版本左侧菜单栏样式 **/
+.left-sider-xs{padding-top:0;position:absolute;top:70px;left:0;width:50px;margin-bottom:40px;}
+.left-sider-xs ul, .left-sider-xs li, .left-sider-xs a{list-style-type:none;float:left;width:100%;}
+.left-sider-xs a{text-align:center;}
+.left-sider-xs a>i{margin-right:0;}
+.left-sider-xs>ul{padding-left:0;}
+.left-sider-xs>ul>li{background:red;margin-bottom:2px;background: none repeat scroll 0 0 rgba(0, 0, 0, 0.2);box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);}
+.left-sider-xs>ul>li>a{display:none;}
+.left-sider-xs>ul>li>a:hover{text-decoration: none;}
+.left-sider-xs>ul>li>ul{padding-left:0;}
+.left-sider-xs>ul>li>ul>li>a{float:left;height:48px;width:100%;font-size:16px;background:transparent;line-height:48px;color: rgba(255, 255, 255, 0.9);}
+.left-sider-xs>ul>li>ul>li>a:hover{text-decoration: none;background-color: rgba(0, 0, 0, 0.2);}
+.left-sider-xs>ul>li>ul>li>ul{padding-left:0;display:none;}
+.left-sider-xs>ul>li>ul>li>ul>li>a{float:left;height:48px;font-size:16px;width:100%;background-color: rgba(0, 0, 0, 0.3);line-height:48px;color: rgba(255, 255, 255, 0.9);}
+.left-sider-xs>ul>li>ul>li>ul>li>a:hover{background-color: rgba(0, 0, 0, 0.2);}
+@media (max-width: 768px) {
+	.left-sider-xs{display:block !important;visibility: visible !important;}
+}
+
+/** 主面板样式 **/
+.main-container{margin-left:240px;width:auto;background:rgba(255, 255, 255, 0.92);padding:10px;padding-bottom:0;}
+.main-container-xs{margin-left:50px;}
+@media (max-width: 768px) {
+	.main-container{margin-left:50px;}
+}
+.main-container>.breadcrumb{padding:6px 8px;border-bottom:1px solid #ddd;background: none repeat scroll 0 0 rgba(0, 0, 0, 0.02);margin:-10px;margin-bottom:10px;}
+
+/** 数量标签 **/
+.noft{background: none repeat scroll 0 0 #a94442;border-radius: 20px;color: white;font-size: 10px;left: 16px;padding: 0;position: absolute;text-align: center;top: 8px;width: 20px;}
+.noft-danger {background-color:#a94442;}
+.noft-success {background-color:#3c763d;}
+.noft-warning {background-color:#8a6d3b;}
+.noft-primary {background-color:#337ab7;}
+
+/** 面板样式 **/
+.panel{margin-bottom:10px;}
+.panel>.panel-heading>i{margin-right:10px;}
+.panel>.panel-operation{padding:8px;text-align:right;border-bottom:1px solid #ddd;}
+
+/** 表单样式 **/
+.help-block {margin: 5px;}
+input[type="radio"], input[type="checkbox"]{margin-top:2px;;}
+.form-horizontal .form-group:last-child{margin-bottom:0;}
+
+/** 模态窗口样式 **/
+.modal .modal-title>i{margin-right:8px;}
+
+/** 按钮样式 **/
+.btn>i{margin-right:8px;}
+.btn-xs>i{margin-right:4px;}
+.btn-icon>i{margin-right:0;}

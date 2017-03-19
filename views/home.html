@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset=UTF-8>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title><%=Title%></title>
+    <link rel="stylesheet" href="/dist/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/dist/lib/weui.min.css">
+    <link rel="stylesheet" href="/dist/css/jquery-weui.min.css">
+    <style>
+        body, html {
+            height: 100%;
+            -webkit-tap-highlight-color: transparent;
+        }
+    </style>
+
+</head>
+<body ontouchstart>
+<div class="weui-tab">
+    <div class="weui-tab__bd">
+        <div id="tab1" class="weui-tab__bd-item weui-tab__bd-item--active">
+            <% include resources.html %>
+        </div>
+        <div id="tab2" class="weui-tab__bd-item">
+            <% include events.html %>
+        </div>
+        <div id="tab3" class="weui-tab__bd-item">
+            <% include add.html %>
+        </div>
+        <div id="tab4" class="weui-tab__bd-item">
+            <h1>页面四</h1>
+        </div>
+    </div>
+
+    <div class="weui-tabbar">
+        <a href="#tab1" class="weui-tabbar__item weui-bar__item--on">
+            <div class="weui-tabbar__icon">
+                <img src="/images/icon_nav_button.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">我的资源</p>
+        </a>
+        <a href="#tab2" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+                <img src="../images/icon_nav_msg.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">事件</p>
+        </a>
+        <a href="#tab3" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+                <img src="../images/icon_nav_article.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">添加</p>
+        </a>
+        <a href="#tab4" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+                <img src="../images/icon_nav_cell.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">我</p>
+        </a>
+    </div>
+</div>
+
+
+
+
+<script src="/dist/js/jquery.min.js"></script>
+<script src="/dist/js/jquery-weui.min.js"></script>
+<script src="/dist/lib/fastclick.js"></script>
+<script>
+    function ask_for_events() {
+        $.post('/ask_for_events',function (data) {
+            if(typeof (data) !="object"||data.length<1)
+            {
+                return;
+            }
+            var len=data.length;
+            var str='';
+            for(var i=0;i<len;i++)
+            {
+                str+=['<div class="weui-form-preview">',
+                    '    <div class="weui-form-preview__hd">',
+                    '        <label class="weui-form-preview__label">事件名称</label>',
+                    '        <em class="weui-form-preview__value">'+data[i].Title+'</em>',
+                    '    </div>',
+                    '    <div class="weui-form-preview__bd">',
+                    '        <div class="weui-form-preview__item">',
+                    '            <label class="weui-form-preview__label">事件描述</label>',
+                    '            <span class="weui-form-preview__value">'+data[i].Description+'</span>',
+                    '        </div>',
+                    '        <div class="weui-form-preview__item">',
+                    '            <label class="weui-form-preview__label">事件开始时间</label>',
+                    '            <span class="weui-form-preview__value">'+data[i].StartDay+'</span>',
+                    '        </div>',
+                    '        <div class="weui-form-preview__item">',
+                    '            <label class="weui-form-preview__label">事件结束时间</label>',
+                    '            <span class="weui-form-preview__value">'+data[i].StopDay+'</span>',
+                    '        </div>',
+                    '        <div class="weui-form-preview__item">',
+                    '            <label class="weui-form-preview__label">事件使用资源</label>',
+                    '            <span class="weui-form-preview__value">'+data[i].Resources+'</span>',
+                    '        </div>',
+                    '        <div class="weui-form-preview__item">',
+                    '            <label class="weui-form-preview__label">事件参与人</label>',
+                    '            <span class="weui-form-preview__value">'+data[i].Users+'</span>',
+                    '        </div>',
+                    '    </div>',
+                    '    <div class="weui-form-preview__ft">',
+                    '        <button type="submit" onclick="action('+data[i].Id+')" class="weui-form-preview__btn weui-form-preview__btn_primary" href="javascript:">操作</button>',
+                    '    </div>',
+                    '</div>'].join("");
+            }
+            document.getElementById('events').innerHTML=str;
+        });
+
+    }
+    $(function () {
+        $.showLoading();
+        $.post('/ask_for_resources',function (data) {
+            if(typeof (data) !="object"||data.length<1)
+            {
+                return;
+            }
+            var len=data.length;
+            var str='';
+            for(var i=0;i<len;i++)
+            {
+                str+=[' <a class="weui-cell weui-cell_access" href="/resources/'+data[i].Id+'">',
+                    '        <div class="weui-cell__bd">',
+                    '            <p>'+data[i].Title+'</p>',
+                    '        </div>',
+                    '        <div class="weui-cell__ft">',
+                    data[i].Tags,
+                    '        </div>',
+                    '    </a>'].join("");
+            }
+            document.getElementById('resources').innerHTML=str;
+            $.hideLoading();
+            ask_for_events();
+        });
+    });
+</script>
+</body>
+</html>

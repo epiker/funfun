@@ -1,0 +1,27 @@
+.process-bar {
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	width: 0%;
+	height: 3px;
+	z-index: 999999;
+	font-size: 0px;
+	opacity: 1;
+	-webkit-box-shadow: 0 0 6px rgba(0, 0, 0, 1);
+	-moz-box-shadow: 0 0 6px rgba(0, 0, 0, 1);
+	-o-box-shadow: 0 0 6px rgba(0, 0, 0, 1);
+	box-shadow: 0 0 6px rgba(0, 0, 0, 1);
+}
+
+.process-bar-icon {
+	position: fixed;
+	top: 14px;
+	left: 50%;
+	margin-left: -8px;
+	width: 16px;
+	height: 16px;
+	z-index: 999999;
+	opacity:1;
+	font-size: 16px;
+	display:none;
+}

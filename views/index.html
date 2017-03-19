@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN" >
+<script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+    function change() {
+      // $('#test').text( $('#input').val());
+        $.ajax({
+            url:'/change',
+            Type:'get',
+            data:{
+                'value':$('#input').val()
+            },
+            timeout:5000,
+            success: function (data) {
+                //var data = $.parseJSON(data);
+                //alert(data);
+
+                if(typeof (data.numFound)=='undefined' || data.numFound<1)
+                {
+                    $('#test').text("");
+                    return;
+                }
+
+                var str='';
+                var data1=data.docs;
+                for (var i=0;i<data1.length;i++)
+                {
+                    data=data1[i];
+                    for(var tmp in data)
+                    {
+                        str+=tmp+":"+data[tmp]+"    ";
+                    }
+                    str+="<br>";
+                }
+
+                document.getElementById('test').innerHTML=str;
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert('error ' + textStatus + " " + errorThrown);
+            }
+        });
+    }
+</script>
+<input oninput="change()" id="input">
+<body>
+  <div id="test"></div>
+</body>
+
+</html>

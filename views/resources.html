@@ -1,0 +1,91 @@
+<script>
+    function change() {
+        // $('#test').text( $('#input').val());
+        $.ajax({
+            url:'/change',
+            Type:'get',
+            data:{
+                'value':$('#searchInput').val()
+            },
+            timeout:5000,
+            success: function (data) {
+                //var data = $.parseJSON(data);
+                //alert(data);
+
+                if(typeof (data.numFound)=='undefined')
+                {
+                    $('#test').text("");
+                    return;
+                }
+                if(data.numFound<1)
+                {
+                    document.getElementById('resources').innerHTML="<h1>无相关资源</h1>";
+                    return;
+                }
+
+                var str='';
+                var docs=data.docs;
+                for (var i=0;i<docs.length;i++)
+                {
+                    str+=[' <a class="weui-cell weui-cell_access" text-decoration=none href="/resources/'+docs[i].Id+'">',
+                        '        <div class="weui-cell__bd">',
+                        '            <p>'+docs[i].Title+'</p>',
+                        '        </div>',
+                        '        <div class="weui-cell__ft">',
+                        docs[i].Tags,
+                        '        </div>',
+                        '    </a>'].join("");
+                }
+
+                document.getElementById('resources').innerHTML=str;
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert('error ' + textStatus + " " + errorThrown);
+            }
+        });
+    }
+</script>
+<script>
+    function searchCancel()
+    {
+        $.showLoading();
+        $.post('/ask_for_resources',function (data) {
+            if(typeof (data) !="object"||data.length<1)
+            {
+                return;
+            }
+            var len=data.length;
+            var str='';
+            for(var i=0;i<len;i++)
+            {
+                str+=[' <a class="weui-cell weui-cell_access" href="/resources/'+data[i].Id+'">',
+                    '        <div class="weui-cell__bd">',
+                    '            <p>'+data[i].Title+'</p>',
+                    '        </div>',
+                    '        <div class="weui-cell__ft">',
+                    data[i].Tags,
+                    '        </div>',
+                    '    </a>'].join("");
+            }
+            document.getElementById('resources').innerHTML=str;
+            $.hideLoading();
+        });
+    }
+</script>
+<div class="weui-search-bar" id="searchBar">
+    <form class="weui-search-bar__form">
+        <div class="weui-search-bar__box">
+            <i class="weui-icon-search"></i>
+            <input type="search" class="weui-search-bar__input" id="searchInput" oninput="change()" placeholder="搜索" required="">
+            <a href="javascript:" class="weui-icon-clear" id="searchClear"></a>
+        </div>
+        <label class="weui-search-bar__label" id="searchText">
+            <i class="weui-icon-search"></i>
+            <span>搜索</span>
+        </label>
+    </form>
+    <a href="javascript:" onclick="searchCancel()" class="weui-search-bar__cancel-btn" id="searchCancel">取消</a>
+</div>
+
+<div class="weui-cells" id="resources">
+</div>

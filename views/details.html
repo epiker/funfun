@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset=UTF-8>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title><%=title%></title>
+    <link rel="stylesheet" href="/dist/lib/weui.min.css">
+    <link rel="stylesheet" href="/dist/css/jquery-weui.min.css">
+    <style>
+        body, html {
+            height: 100%;
+            -webkit-tap-highlight-color: transparent;
+        }
+    </style>
+
+</head>
+<body ontouchstart>
+<div class="weui-tab">
+    <div class="weui-tab__bd">
+        <div id="tab1" class="weui-tab__bd-item weui-tab__bd-item--active">
+            <div class="weui-cells weui-cells_form">
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label">编号</label></div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" readonly="readonly" type="number" value="<%=Id%>" >
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label">标题</label></div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="string" value="<%=Title%>" >
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label">描述</label></div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="string" value="<%=Description%>" >
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label">标签</label></div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="string" value="<%=Tags%>" >
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label">数量</label></div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="number" value="<%=Count%>" >
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label">价格</label></div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="number" value="<%=CostPrice%>" >
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label">添加时间</label></div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="string" readonly="readonly" value="<%=CreateTime%>" >
+                    </div>
+                </div>
+                <div class="button_sp_area">
+                    <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary">按钮</a>
+                    <a href="/home" class="weui-btn weui-btn_mini weui-btn_default">返回</a>
+                </div>
+
+            </div>
+        </div>
+        <div id="tab2" class="weui-tab__bd-item">
+            <h1>页面二</h1>
+        </div>
+        <div id="tab3" class="weui-tab__bd-item">
+            <h1>页面三</h1>
+        </div>
+        <div id="tab4" class="weui-tab__bd-item">
+            <h1>页面四</h1>
+        </div>
+    </div>
+
+    <div class="weui-tabbar">
+        <a href="#tab1" class="weui-tabbar__item weui-bar__item--on">
+            <div class="weui-tabbar__icon">
+                <img src="/images/icon_nav_button.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">我的资源</p>
+        </a>
+        <a href="#tab2" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+                <img src="../images/icon_nav_msg.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">事件</p>
+        </a>
+        <a href="#tab3" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+                <img src="../images/icon_nav_article.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">添加</p>
+        </a>
+        <a href="#tab4" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+                <img src="../images/icon_nav_cell.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">我</p>
+        </a>
+    </div>
+</div>
+
+
+
+
+<script src="/dist/js/jquery.min.js"></script>
+<script src="/dist/js/jquery-weui.min.js"></script>
+<script src="/dist/lib/fastclick.js"></script>
+</body>
+</html>
